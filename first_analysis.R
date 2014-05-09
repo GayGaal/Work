@@ -13,8 +13,6 @@ post[is.na(post)] <- 0
 ## performing operations with dates and times to obtain additional data 
 post$Time <- as.POSIXct(strftime(post$Date, format="%H:%M:%S"), format="%H:%M:%S")
 post$Date <- as.POSIXct(strptime(post$Date, format="%Y-%m-%d %H:%M:%S"))
-## cleaning the data
-post<-subset(post, post$Engagements < 1000)
 ## obtaining the weekdays
 weekday<-as.factor(weekdays(post$Date))
 levels(weekday) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
