@@ -17,6 +17,13 @@ post$Date <- as.POSIXct(strptime(post$Date, format="%Y-%m-%d %H:%M:%S"))
 weekday<-as.factor(weekdays(post$Date))
 levels(weekday) <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
 post$Weekday<-weekday
+## cleaning the data
+clean <- function (q) {
+        q <-as.numeric(readline("Which quantile should limit the data? (use decimals) "))
+        setq <- quantile(post$Engagements, q)
+        post <<- subset(post, post$Engagement < setq)
+}
+clean()
 ## plotting the needed graphs                                             ##
 ## plotting the graph with all engagements
 png("engagements.png", width=1000, height=1000)
